@@ -1,0 +1,12 @@
+{
+  "name": "dazn-coding-challenge",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "john@johnginger.co.uk",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "express": "^4.16.4",
+    "serverless-http": "^1.9.0"
+  }
+}
