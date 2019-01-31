@@ -12,7 +12,14 @@
     "ms": "^2.1.1",
     "serverless-http": "^1.9.0"
   },
+  "scripts": {
+    "test": "jest",
+    "deploy": "jest && sls deploy"
+  },
   "devDependencies": {
-    "aws-sdk": "^2.395.0"
+    "aws-sdk": "^2.395.0",
+    "jest": "^24.0.0",
+    "serverless-dynamodb-local": "^0.2.36",
+    "serverless-offline": "^4.2.1"
   }
 }

@@ -24,7 +24,7 @@ provider:
     TOKEN_SECRET: "MY_SUPER_SECRET_TOKEN"
     TOKEN_EXPIRY: "30s"
     TOKEN_GRACE_PERIOD: "1s"
-    MAX_TOKENS: 3
+    MAX_TOKENS: "3"
 
 functions:
   app:
