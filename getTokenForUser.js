@@ -21,19 +21,18 @@ const getTokenForUser = async function(userId) {
       if (result.Item) {
         const { userId, tokenExpiryTimes } = result.Item;
         console.info(`The tokens they currently have are ${tokenExpiryTimes}`);
-        // Get tokens that haven't expired
-        const filteredTokenExpiryTimes = tokenExpiryTimes.filter(
+        const tokensThatAreNotExpired = tokenExpiryTimes.filter(
           x => x >= moment().unix()
         );
         console.info(
-          `After removing expired tokens they have ${filteredTokenExpiryTimes}`
+          `After removing expired tokens they have ${tokensThatAreNotExpired}`
         );
-        if (filteredTokenExpiryTimes.length < MAX_TOKENS) {
+        if (tokensThatAreNotExpired.length < MAX_TOKENS) {
           console.info(`Creating a new token as under the limit`);
           const { tokenExpiry, token } = createToken(userId);
           await updateUser({
             userId,
-            tokenExpiryTimes: [tokenExpiry, ...filteredTokenExpiryTimes]
+            tokenExpiryTimes: [tokenExpiry, ...tokensThatAreNotExpired]
           });
           console.info(`Tokens expire at ${tokenExpiryTimes}`);
 
