@@ -1,4 +1,4 @@
-This is based on https://serverless.com/blog/serverless-express-rest-api/
+This is loosely based on https://serverless.com/blog/serverless-express-rest-api/
 
 # To deploy install serverless (npm install -g serverless) and run
 sls deploy
@@ -19,14 +19,23 @@ or 403 {
     error: "Max tokens exceeded"
 }
 
-The token can be stored in browser - so if you navigate away that token isn't lost
-The length of a token is a performance tradeoff, long ages mean that you don't need to make so many requests, but a user might be 'stuck' on devices that they haven't watched for a while
+The token can be stored in browser - so if you navigate away that token isn't lost. 
 
+The length of a token is a performance tradeoff, long ages mean that you don't need to make so many requests, but a user might be 'stuck' on devices that they haven't watched for a while.
 
+These tokens could be shared around out of band to enable watching on more devices, so the video server which is
+checking for the token could check they are coming from the same IP.
 
 Database design
 
 users {
     user_id: string
-    tokens_age: list of datetimes
+    tokens_expiry: unix timestamp when token expires
 }
+
+Environment variables
+USERS_TABLE: ${self:custom.tableName}
+TOKEN_SECRET: "MY_SUPER_SECRET_TOKEN"
+TOKEN_EXPIRY: "30s"
+TOKEN_GRACE_PERIOD: "1s"
+MAX_TOKENS: 3
