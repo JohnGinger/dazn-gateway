@@ -32,14 +32,14 @@ Database design
 
 users {
     user_id: string
-    tokens_expiry: unix timestamp when token expires
+    tokens_expiry: list of unix timestamp when token expires
 }
 
 Environment Variables:
 USERS_TABLE: ${self:custom.tableName}
 TOKEN_SECRET: e.g. "MY_SUPER_SECRET_TOKEN"
 TOKEN_EXPIRY: e.g. "30s"
-TOKEN_GRACE_PERIOD: "1s"  // We add a grace period to allow refreshing the token before it expires and not going over the token limit
+TOKEN_GRACE_PERIOD: "1s"  // We add a grace period to allow refreshing the token before it expires and not going over the token limit (e.g. the difference between when the token expires, and when a new token is granted. This could also be done in the video layer)
 MAX_TOKENS: 3 
 
 Scaling:
